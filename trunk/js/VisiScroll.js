@@ -32,15 +32,12 @@ VisiScroll = function(htmlContent){
 	this.mouseWheelCallback = function(e){
 		
 		var normal = e.detail ? e.detail * -1 : e.wheelDelta / 40;
-		console.log(normal);
-		
 		self.sliderClicked = true;
 		
 		var newPos = self.slidingWindow.y + normal * -1;
         self.positionSlider(newPos);
 		
 		self.sliderClicked = false;
-		
 		self.cancelEvent(e);
 	};
 	
