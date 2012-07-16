@@ -36,6 +36,7 @@ VisiScroll = function(htmlContent){
 		
 		var newPos = self.slidingWindow.y + normal * -1;
         self.positionSlider(newPos);
+		self.slidingWindow.lastSetPosition = newPos;
 		
 		self.sliderClicked = false;
 		self.cancelEvent(e);
