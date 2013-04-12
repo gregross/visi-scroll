@@ -122,6 +122,8 @@ VisiScroll = function(htmlContent){
             self.slidingWindow.lastClickedPos = clickPosY;
         }
         else {
+            self.slidingWindow.lastClickedPos = clickPosY;
+            self.slidingWindow.lastSetPosition = clickPosY - 10;
             self.positionSlider(clickPosY - 10);
         }
     });
