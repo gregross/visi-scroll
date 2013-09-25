@@ -1,5 +1,26 @@
 VisiScroll = function(htmlContent){
 
+    function relMouseCoords(e){
+    
+      var element = this, offsetX = 0, offsetY = 0, mx, my;
+  
+      // Compute the total offset. It's possible to cache this if you want
+      if (element.offsetParent !== undefined) {
+        do {
+          offsetX += element.offsetLeft;
+          offsetY += element.offsetTop;
+        } while ((element = element.offsetParent));
+      }
+      
+      mx = e.pageX - offsetX;
+      my = e.pageY - offsetY;
+      
+      // We return a simple javascript object with x and y defined
+      return {x: mx, y: my};
+      
+    };
+    HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
+
     this.hookEvent = function(element, eventName, callback){
         if (typeof(element) == "string") 
             element = document.getElementById(element);
@@ -114,7 +135,7 @@ VisiScroll = function(htmlContent){
     };
     
     $(this.canvas).mousedown(function(e){
-        var clickPosY = e.pageY - this.offsetTop;
+        var clickPosY = self.canvas.relMouseCoords(e).y;
         
         self.sliderClicked = true;
         
@@ -129,7 +150,7 @@ VisiScroll = function(htmlContent){
     });
     
     $("body").mousemove(function(e){
-        var posY = e.pageY - self.canvas.offsetTop;
+        var posY = self.canvas.relMouseCoords(e).y;
         var newPos = self.slidingWindow.lastSetPosition + posY - self.slidingWindow.lastClickedPos;
         self.positionSlider(newPos);
     });
