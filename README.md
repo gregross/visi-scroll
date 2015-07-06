@@ -1,4 +1,4 @@
-# Scrolling in HTML just got easier`!` #
+# HTML highlights in scroll-bar #
 
 created by Greg Ross
 
