@@ -9,7 +9,7 @@ Add markers to a vertical scrollbar in HTML to help identify areas of interest i
 
 Works in Firefox, Chrome, Safari and Opera.
 
-## See the [jsFiddle](http://jsfiddle.net/gregross/9vZ3f/) example. ##
+## See the [jsFiddle](http://jsfiddle.net/9vZ3f/3/) example. ##
 
 <a href="http://jsfiddle.net/gregross/9vZ3f/"><img src="images/1.png"></a>
 
