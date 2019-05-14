@@ -11,7 +11,7 @@ Works in Firefox, Chrome, Safari and Opera.
 
 ## See the [jsFiddle](http://jsfiddle.net/9vZ3f/3/) example. ##
 
-<a href="http://jsfiddle.net/gregross/9vZ3f/"><img src="images/1.png"></a>
+<a href="http://jsfiddle.net/9vZ3f/3/"><img src="images/1.png"></a>
 
 HTML elements can be 'marked' with a colour and made visible even though they have been scrolled out of sight.
 
