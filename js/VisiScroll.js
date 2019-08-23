@@ -87,8 +87,8 @@ VisiScroll = function(htmlContent){
             slider.canvasContext.strokeStyle = '#888';
             slider.canvasContext.stroke();
             
-            if (scroll) {
-                $(htmlContent).css('marginTop', -this.y * ($(htmlContent).height() / $(parent).height()));
+            if (scroll && $(htmlContent).height() > $(parent).height()) {
+                $(htmlContent).css('marginTop', -this.y * ($(htmlContent).height() / contentHeight));
             }
         }
         
@@ -184,10 +184,32 @@ VisiScroll = function(htmlContent){
         self.canvasContext.fillRect(0, 0, self.canvas.width, self.canvas.height);
     };
     
+    var markers = [];
+    var markersFilled = false;
+
+     this.scrollTo = function(markerIdx) {
+      var clickPosY = markers[markerIdx];
+
+       self.sliderClicked = true;
+
+       if (self.mouseClickedInSlider(clickPosY)) {
+          self.slidingWindow.lastClickedPos = clickPosY;
+      }
+      else {
+          self.slidingWindow.lastClickedPos = clickPosY;
+          self.slidingWindow.lastSetPosition = clickPosY - 10;
+          self.positionSlider(clickPosY - 10);
+      }
+
+       self.sliderClicked = false;
+    };
+
     this.renderMarginMarks = function(recalculateMarkers){
         var sliderMarkerElements = $(htmlContent).find('[visiScrollMarker]');
         
         if (recalculateMarkers || !this.markers) {
+            markersFilled = false;
+            markers = [];
             this.markers = sliderMarkerElements.map(function(){
             
                 var top = this.offsetTop - $(this).parent().position().top;
@@ -210,8 +232,14 @@ VisiScroll = function(htmlContent){
             
             self.canvasContext.fillStyle = lingrad;
             var tTop = (self.canvas.height / $(htmlContent).height()) * marker.top;
+
+            if (!markersFilled)
+              markers.push(tTop);
+
             self.canvasContext.fillRect(1, tTop, self.canvas.width - 1, marker.height < 2 ? 2 : marker.height);
         });
+
+        markersFilled = true;
     }
     
     this.redraw();
